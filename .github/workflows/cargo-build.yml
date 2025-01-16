@@ -1,0 +1,41 @@
+name: Rust Build Check
+
+on:
+  push:
+    branches:
+      - main  # Run on pushes to the `main` branch
+  pull_request:
+    branches:
+      - main  # Run on pull requests targeting the `main` branch
+
+jobs:
+  build:
+    name: Build All Workspace Members
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Rust
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable  # Use the stable version of Rust
+          override: true
+
+      # Step 3: Cache Cargo dependencies for faster builds
+      - name: Cache Cargo registry and build
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      # Step 4: Run cargo build
+      - name: Build Rust workspace
+        run: cargo build --workspace --locked
