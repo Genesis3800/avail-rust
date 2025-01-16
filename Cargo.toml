@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+members = [
+    "dataAvailability_createApplicationKey",
+    "dataAvailability_submitData",
+    "dataAvailability_submitData_specific",
+    "dataAvailability_appKeys",
+    "dataAvailability_nextAppId",
+    "balances_transferKeepAlive",
+    "balances_transferAllowDeath",
+    "balances_transferAll",
+    "system_account",
+    "staking_bond",
+    "staking_nominate",
+    "staking_unbond",
+    "staking_activeEra", "dataAvailability_appKeys_specific", "staking_validate", "staking_chill", "nominationPools_create", "nominationPools_createWithPoolId", "nominationPools_nominate", "nominationPools_join",
+]
